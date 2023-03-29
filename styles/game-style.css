@@ -1,0 +1,66 @@
+.game{
+  margin: 0 auto;
+  margin-top: 200px;
+}
+.game input {
+  border-radius: 5px;
+  border: 1px black solid;
+}
+.game fieldset {
+  margin-left: 30%;
+  margin-right: 30%;
+  border-radius: 50px;
+}
+.game .lose {
+  width: 100vw;
+  height:100vh;
+  background-color: rgb(255 0 0 /87%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+ visibility: visible;
+
+}
+.game .btn {
+  margin-top: 11px;
+  height: 50px;
+  margin: 0 auto;
+  text-align: center;
+}
+.game .win {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 148, 0, 0.8);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+.game .playAgain {
+  margin-top: 7%;
+  margin-left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+.game .text {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.game #hangman {
+  margin: auto; 
+  display: block;
+}
+
+.game .input {
+  text-align: center;
+  font-size: 50px;
+}
+.game .inputLetter{
+  padding:10px;
+  font-size:20px;
+  text-align: center;
+}
