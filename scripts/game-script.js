@@ -1,30 +1,11 @@
 const buttons = [
-  a = document.getElementById("a"),
-  b = document.getElementById("b"),
-  c = document.getElementById("c"),
-  d = document.getElementById("d"),
-  e = document.getElementById("e"),
-  f = document.getElementById("f"),
-  g = document.getElementById("g"),
-  h = document.getElementById("h"),
-  i = document.getElementById("i"),
-  j = document.getElementById("j"),
-  k = document.getElementById("k"),
-  l = document.getElementById("l"),
-  m = document.getElementById("m"),
-  n = document.getElementById("n"),
-  o = document.getElementById("o"),
-  p = document.getElementById("p"),
-  q = document.getElementById("q"),
-  r = document.getElementById("r"),
-  s = document.getElementById("s"),
-  u = document.getElementById("u"),
-  v = document.getElementById("v"),
-  w = document.getElementById("w"),
-  x = document.getElementById("x"),
-  y = document.getElementById("y"),
-  z = document.getElementById("z"),
+
 ]
+// Store the letters as an array in a constant
+const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+// Output the letters in the console
+
 
 const words = [
   "kubin",
@@ -80,6 +61,7 @@ function startGame() {
 
   clearScreen();
   updateUI();
+  generateButtons()
 }
 
 //update of components on the screen
@@ -101,7 +83,16 @@ function guess(letter) {
     }
   }
   
-  //Logic that i dont understand
+  console.log(letter);
+  
+  //removing button of that letter
+  buttons[alphabet.indexOf(letter)].remove();
+  buttons.splice(alphabet.indexOf(letter),1)
+  alphabet.splice(alphabet.indexOf(letter),1)
+
+
+
+
   letter = letter.toLowerCase();
   let hWord = "";
   let error = true;
@@ -181,8 +172,25 @@ function lose() {
   button.type = "button";
   button.innerHTML = "Play Again";
   button.addEventListener("click", startGame);
-
+  console.log(buttons.length);
   element.appendChild(button);
+}
+function generateButtons(){
+  if (buttons.length < 26 && buttons.length > 0) {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].remove();
+      buttons.splice(i,1) 
+    }
+  }
+  for (let i = 0; i < 26; i++) {
+    const button = document.createElement("button");
+    button.innerHTML = alphabet[i].toUpperCase();
+    button.id = alphabet[i]
+    button.classList += "btn btn-outline-success me-2"
+    button.addEventListener("click", () => guess(alphabet[i]));
+    document.getElementById("buttons").appendChild(button);
+    buttons.push(button);
+  }
 }
 //checker of win
 function didUserWin() {
