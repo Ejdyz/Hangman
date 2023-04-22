@@ -46,10 +46,33 @@
       <div class="input">
         <h3 id="hiddenWord"></h3>
 
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('a')">A</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('b')">B</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('c')">C</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('d')">D</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('e')">E</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('f')">F</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('g')">G</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('h')">H</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('i')">I</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('j')">J</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('k')">K</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('l')">L</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('m')">M</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('n')">N</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('o')">O</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('p')">P</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('q')">Q</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('r')">R</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('s')">S</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('t')">T</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('u')">U</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('v')">V</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('w')">W</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('x')">X</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('y')">Y</button>
+          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="guess('z')">Z</button>
 
-          <input class="inputLetter"type="text" id="letter" />
-
-          <button class="btn btn-outline-success me-2" id="button" type="submit" onclick="onGuessClick()">Guess</button>
 
         <h5 style="color:white; margin-top:10px;" id="usedLetters">Použitá písmena: </h5>
       </div>
