@@ -41,3 +41,25 @@ nových slov do databáze.
 ### Statistiky
 
 - Každý hráč si může pro svůj účet zobrazit procentuální úspěšnost hádání slov a konkrétní hodnoty úspěšných a neúspěšných her
+
+## Rozpis práce
+
+- home page -Ejdy
+
+- Register a login backend  -Ejdy
+
+- Databaze  -Vláďa
+  --user
+  --slova
+  --tabulka zaznamu
+   | user | win/loose | word |
+
+- fix sibenice  -Ejdy
+
+- api pro sibenici  -Vláďa
+  --dotazani na slovo
+  --odesilani zaznamu
+
+- stranka s user statistikama  -Ejdy
+
+- admin stranka pro pridavani slov  -Vláďa
