@@ -40,13 +40,6 @@ const img = document.getElementById("hangman");
 const hiddenWordElement = document.getElementById("hiddenWord");
 const btn = document.getElementById("button");
 
-//Listener for ENTER on input
-letterElement.addEventListener("keyup", function (event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById("button").click();
-  }
-});
 
 //starting game
 startGame();
@@ -54,8 +47,6 @@ startGame();
 function startGame() {
   currentWord = rndWord(words);
   hiddenCurrentWord = getHiddenWord(currentWord);
-
-  document.getElementById("usedLetters").innerHTML = "Použitá písmena: ";
 
   errorCount = 0;
 
@@ -101,7 +92,6 @@ function guess(letter) {
   //adding used letters
   if (error) {
     errorCount++;
-    document.getElementById("usedLetters").innerHTML += letter + ", ";
   }
 
   updateUI();
