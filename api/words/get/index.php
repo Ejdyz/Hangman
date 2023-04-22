@@ -6,7 +6,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT word FROM words ORDER BY RAND() LIMIT 1"; // get word form database
+$sql = "SELECT id, word FROM words ORDER BY RAND() LIMIT 1"; // get word form database
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -16,7 +16,13 @@ if (mysqli_num_rows($result) > 0) {
     $word = "No words found in database.";
 }
 
-header('Content-Type: application/json; charset=utf-8');
+session_start();
+$_SESSION["word_id"] = $row["id"];
+
+header("Content-Type: application/json; charset=utf-8");
 echo json_encode(array("word" => $word));
 
+
 mysqli_close($conn);
+
+?>
