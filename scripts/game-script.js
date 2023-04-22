@@ -1,3 +1,31 @@
+const buttons = [
+  a = document.getElementById("a"),
+  b = document.getElementById("b"),
+  c = document.getElementById("c"),
+  d = document.getElementById("d"),
+  e = document.getElementById("e"),
+  f = document.getElementById("f"),
+  g = document.getElementById("g"),
+  h = document.getElementById("h"),
+  i = document.getElementById("i"),
+  j = document.getElementById("j"),
+  k = document.getElementById("k"),
+  l = document.getElementById("l"),
+  m = document.getElementById("m"),
+  n = document.getElementById("n"),
+  o = document.getElementById("o"),
+  p = document.getElementById("p"),
+  q = document.getElementById("q"),
+  r = document.getElementById("r"),
+  s = document.getElementById("s"),
+  u = document.getElementById("u"),
+  v = document.getElementById("v"),
+  w = document.getElementById("w"),
+  x = document.getElementById("x"),
+  y = document.getElementById("y"),
+  z = document.getElementById("z"),
+]
+
 const words = [
   "kubin",
   "párátko",
@@ -26,6 +54,7 @@ const words = [
   "část",
 ];
 
+
 //getting random word and defiing hidden word
 let currentWord = rnd(0, words.length);
 let hiddenCurrentWord = "";
@@ -35,7 +64,6 @@ const maxErrorCount = 12;
 let errorCount = 0;
 
 //inicializing elements
-const letterElement = document.getElementById("letter");
 const img = document.getElementById("hangman");
 const hiddenWordElement = document.getElementById("hiddenWord");
 const btn = document.getElementById("button");
@@ -57,7 +85,7 @@ function startGame() {
 //update of components on the screen
 function updateUI() {
   hiddenWordElement.innerHTML = hiddenCurrentWord;
-  letterElement.value = "";
+
   img.src = "../hangman-images/" + errorCount + ".png";
 }
 
@@ -72,7 +100,7 @@ function guess(letter) {
       return;
     }
   }
-
+  
   //Logic that i dont understand
   letter = letter.toLowerCase();
   let hWord = "";
@@ -155,10 +183,6 @@ function lose() {
   button.addEventListener("click", startGame);
 
   element.appendChild(button);
-}
-//function on click
-function onGuessClick() {
-  guess(letterElement.value);
 }
 //checker of win
 function didUserWin() {
