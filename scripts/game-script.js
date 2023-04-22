@@ -1,3 +1,12 @@
+const buttons = [
+
+]
+// Store the letters as an array in a constant
+const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+// Output the letters in the console
+
+
 const words = [
   "kubin",
   "párátko",
@@ -26,6 +35,7 @@ const words = [
   "část",
 ];
 
+
 //getting random word and defiing hidden word
 let currentWord = rnd(0, words.length);
 let hiddenCurrentWord = "";
@@ -35,18 +45,10 @@ const maxErrorCount = 12;
 let errorCount = 0;
 
 //inicializing elements
-const letterElement = document.getElementById("letter");
 const img = document.getElementById("hangman");
 const hiddenWordElement = document.getElementById("hiddenWord");
 const btn = document.getElementById("button");
 
-//Listener for ENTER on input
-letterElement.addEventListener("keyup", function (event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById("button").click();
-  }
-});
 
 //starting game
 startGame();
@@ -55,18 +57,17 @@ function startGame() {
   currentWord = rndWord(words);
   hiddenCurrentWord = getHiddenWord(currentWord);
 
-  document.getElementById("usedLetters").innerHTML = "Použitá písmena: ";
-
   errorCount = 0;
 
   clearScreen();
   updateUI();
+  generateButtons()
 }
 
 //update of components on the screen
 function updateUI() {
   hiddenWordElement.innerHTML = hiddenCurrentWord;
-  letterElement.value = "";
+
   img.src = "../hangman-images/" + errorCount + ".png";
 }
 
@@ -81,8 +82,17 @@ function guess(letter) {
       return;
     }
   }
+  
+  console.log(letter);
+  
+  //removing button of that letter
+  buttons[alphabet.indexOf(letter)].remove();
+  buttons.splice(alphabet.indexOf(letter),1)
+  alphabet.splice(alphabet.indexOf(letter),1)
 
-  //Logic that i dont understand
+
+
+
   letter = letter.toLowerCase();
   let hWord = "";
   let error = true;
@@ -101,7 +111,6 @@ function guess(letter) {
   //adding used letters
   if (error) {
     errorCount++;
-    document.getElementById("usedLetters").innerHTML += letter + ", ";
   }
 
   updateUI();
@@ -163,12 +172,25 @@ function lose() {
   button.type = "button";
   button.innerHTML = "Play Again";
   button.addEventListener("click", startGame);
-
+  console.log(buttons.length);
   element.appendChild(button);
 }
-//function on click
-function onGuessClick() {
-  guess(letterElement.value);
+function generateButtons(){
+  if (buttons.length < 26 && buttons.length > 0) {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].remove();
+      buttons.splice(i,1) 
+    }
+  }
+  for (let i = 0; i < 26; i++) {
+    const button = document.createElement("button");
+    button.innerHTML = alphabet[i].toUpperCase();
+    button.id = alphabet[i]
+    button.classList += "btn btn-outline-success me-2"
+    button.addEventListener("click", () => guess(alphabet[i]));
+    document.getElementById("buttons").appendChild(button);
+    buttons.push(button);
+  }
 }
 //checker of win
 function didUserWin() {
