@@ -26,18 +26,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./sites/game.php">Game</a>
+                        <a class="nav-link" href="../game.php">Game</a>
                     </li>
 
                     <?php if (isset($_SESSION["user"])){?>
                         <li class="nav-item">
-                            <a class="nav-link" href="./sites/words.php">Words</a>
+                            <a class="nav-link" href="../words.php">Words</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./sites/stats.php">Statistics</a>
+                            <a class="nav-link" href="../stats.php">Statistics</a>
                         </li>
 
                 <?php } ?>
@@ -45,15 +45,15 @@
                 <?php if (isset($_SESSION["user"])){?>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item pull-right">
-                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./sites/register.php"><?php echo $_SESSION["user"]  ?></a>
+                            <a class="btn btn-outline-success me-2 disabled" type="button" href="../stats.php"><?php echo $_SESSION["user"]  ?></a>
                         </li>
                     </ul>
                 <?php }else{?>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item pull-right">
-                        <a class="btn btn-outline-success me-2" type="button" href="./sites/register.php">Register</a>
-                        <a class="btn btn-sm btn-outline-secondary" type="button" href="./sites/login.php">Login</a>
+                        <a class="btn btn-outline-success me-2" type="button" href="../register.php">Register</a>
+                        <a class="btn btn-sm btn-outline-secondary" type="button" href="../login.php">Login</a>
                     </li>
                 </ul>
                 <?php }?>
