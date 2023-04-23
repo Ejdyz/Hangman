@@ -1,0 +1,9 @@
+.body {
+  width: 80%;
+  height: 80vh;
+  background-color: rgb(43, 48, 53);
+  margin-top: 5%;
+  margin-left: 10%;
+  padding: 2.5%;
+  border-radius: 10px;
+}

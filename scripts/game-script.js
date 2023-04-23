@@ -1,43 +1,47 @@
-const buttons = [
+let buttons = [
 
 ]
 // Store the letters as an array in a constant
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
+let tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let numOfButtons = 26;
 // Output the letters in the console
 
+function generateButton(){
+  for (let i = 0; i < 26; i++) {
+    const button = document.createElement("button");
+    button.innerHTML = alphabet[i].toUpperCase();
+    button.id = alphabet[i]
+    button.classList += "btn btn-outline-success me-2"
+    button.addEventListener("click", () => guess(alphabet[i]));
+    document.getElementById("buttons").appendChild(button);
+    buttons.push(button);
+  }
+}
+function deleteButton(letter){
 
-const words = [
-  "kubin",
-  "párátko",
-  "kolotoč",
-  "kosik",
-  "tabule",
-  "dědictví",
-  "ragby",
-  "ptakopysk",
-  "mrak",
-  "klan",
-  "signál",
-  "kleště",
-  "česko",
-  "hřebec",
-  "topol",
-  "báseň",
-  "řasa",
-  "záškolák",
-  "zápalky",
-  "vítěz",
-  "lentilka",
-  "mráček",
-  "duch",
-  "sekunda",
-  "část",
-];
+  buttons[tempAlpha.indexOf(letter)].remove();
+  buttons.splice(tempAlpha.indexOf(letter),1)
+  tempAlpha.splice(tempAlpha.indexOf(letter),1)
+  numOfButtons--;
+}
+function deleteAllButons(){
+  buttons.forEach(btn => {
+    btn.remove();
+  });
+  buttons = [];
+  tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+}
 
 
+let currentWord;
 //getting random word and defiing hidden word
-let currentWord = rnd(0, words.length);
+
+function getWorld(){
+  axios.get("../api/words/get.php").then(response => {
+    currentWord = response.data.word;
+  })
+}
 let hiddenCurrentWord = "";
 
 //defiing errors
@@ -53,15 +57,20 @@ const btn = document.getElementById("button");
 //starting game
 startGame();
 
+
 function startGame() {
-  currentWord = rndWord(words);
-  hiddenCurrentWord = getHiddenWord(currentWord);
+  getWorld()
+  setTimeout(() => {  
+    hiddenCurrentWord = getHiddenWord(currentWord);
+    updateUI()
+
+  }, 20)
 
   errorCount = 0;
 
   clearScreen();
   updateUI();
-  generateButtons()
+  generateButton()
 }
 
 //update of components on the screen
@@ -83,14 +92,7 @@ function guess(letter) {
     }
   }
   
-  console.log(letter);
-  
-  //removing button of that letter
-  buttons[alphabet.indexOf(letter)].remove();
-  buttons.splice(alphabet.indexOf(letter),1)
-  alphabet.splice(alphabet.indexOf(letter),1)
-
-
+  deleteButton(letter)
 
 
   letter = letter.toLowerCase();
@@ -132,6 +134,7 @@ function clearScreen() {
 }
 //win over all screen
 function win() {
+  deleteAllButons()
   const element = document.getElementById("overGame");
   element.className += "win";
 
@@ -146,14 +149,17 @@ function win() {
   element.appendChild(slovo);
 
   const button = document.createElement("button");
-  button.className += "btn btn-sm btn-outline-secondary ";
+  button.className += "playAgain btn btn-secondary rounded-pill px-3";
+  button.type = "button";
   button.innerHTML = "Play Again";
   button.addEventListener("click", startGame);
-
   element.appendChild(button);
+  sendData(true);
+
 }
 //loose over all screen
 function lose() {
+  deleteAllButons()
   const element = document.getElementById("overGame");
   element.className += "lose";
 
@@ -172,25 +178,23 @@ function lose() {
   button.type = "button";
   button.innerHTML = "Play Again";
   button.addEventListener("click", startGame);
-  console.log(buttons.length);
   element.appendChild(button);
+
+  //odesilani zaznamu do databaze
+  //dotazat se na to jestli je lognuty
+  sendData(false);
 }
-function generateButtons(){
-  if (buttons.length < 26 && buttons.length > 0) {
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].remove();
-      buttons.splice(i,1) 
-    }
-  }
-  for (let i = 0; i < 26; i++) {
-    const button = document.createElement("button");
-    button.innerHTML = alphabet[i].toUpperCase();
-    button.id = alphabet[i]
-    button.classList += "btn btn-outline-success me-2"
-    button.addEventListener("click", () => guess(alphabet[i]));
-    document.getElementById("buttons").appendChild(button);
-    buttons.push(button);
-  }
+
+
+
+function sendData(win) {
+
+  // axios.post("../api/results/send.php", {
+  // TODO based on api
+  // })
+  console.log("name")
+  console.log("win:" + win)
+  console.log(currentWord)
 }
 //checker of win
 function didUserWin() {
@@ -207,10 +211,6 @@ function getHiddenWord(word) {
     hiddenWord += "-";
   }
   return hiddenWord;
-}
-//get random world
-function rndWord(words) {
-  return words[rnd(0, words.length)];
 }
 //defining random
 function rnd(min, max) {

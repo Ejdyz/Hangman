@@ -10,19 +10,23 @@
 </head>
 
 <body>
-    <div class="login-box" action="POST">
+    <div class="login-box" >
         <h2>Register</h2>
-        <form>
+        <form method="POST" action="../registrationBackend/registrationHandler.php">
             <div class="user-box">
-                <input type="email" name="" required>
+                <input type="text" name="Username" required>
+                <label>Usernamel</label>
+            </div>
+            <div class="user-box">
+                <input type="email" name="Email" required>
                 <label>Email</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required>
+                <input type="password" name="Password" required>
                 <label>Password</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required>
+                <input type="password" name="CheckPassword" required>
                 <label>Password Again</label>
             </div>
             <button>
