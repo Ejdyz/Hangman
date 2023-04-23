@@ -10,6 +10,7 @@ if (!$conn) {
 session_start();
 // if (!isset($_SESSION['user_id'])) { //todo add login
 //     header("HTTP/1.1 401 Unauthorized");
+//     echo "You need to be logged in";
 //     exit;
 // }
 
@@ -18,6 +19,7 @@ if (isset($_POST['word'])) {
     $word = $_POST['word'];
 } else {
     header("HTTP/1.1 400 Bad Request");
+    echo "Bad request";
     exit;
 }
 
