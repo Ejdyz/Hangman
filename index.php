@@ -1,6 +1,5 @@
 <?php 
     session_start();
-    //$_SESSION["user"] = "ejdy";
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
