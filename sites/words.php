@@ -49,10 +49,10 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" aria-current="page" href="../">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="game.php">Game</a>
+                        <a class="nav-link" href="./game.php">Game</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./words.php">Words</a>
