@@ -54,6 +54,6 @@ nových slov do databáze.
 
 - ~~api pro sibenici  -Vláďa --dotazani na slovo --odesilani zaznamu~~
 
-- stranka s user statistikama  -Ejdy
+- stranka s user statistikama  -Vláďa
 
 - admin stranka pro pridavani slov  -Vláďa
