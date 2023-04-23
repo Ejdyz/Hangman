@@ -77,6 +77,7 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item pull-right">
                             <a class="btn btn-outline-success me-2 disabled" type="button" href="./register.php"><?php echo $_SESSION["user"]  ?></a>
+                            <a href="../utils/logout.php"class="btn btn-outline-danger">Logout</a>
                         </li>
                     </ul>
                 <?php }else{?>
