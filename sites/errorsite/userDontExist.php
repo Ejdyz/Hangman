@@ -74,7 +74,7 @@
           <h4 class="alert-heading">Well, this is awkward!</h4>
           <p>It seems that profile you want to log in doesn't exist.</p>
           <hr>
-          <p class="mb-0">But you can register here:  <form style="display:inline"action="../login.php"><br><button class='btn btn-danger btn-sm delete-word'  >Register</button></form></p>
+          <p class="mb-0">But you can register here:  <form style="display:inline"action="../register.php"><br><button class='btn btn-danger btn-sm delete-word'  >Register</button></form></p>
       </div>
   </div>
 
