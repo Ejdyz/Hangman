@@ -1,6 +1,5 @@
-<?php 
-    session_start();
-?>
+<?php
+session_start(); ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
   <head>
@@ -33,7 +32,7 @@
                         <a class="nav-link active" href="game.php">Game</a>
                     </li>
 
-                    <?php if (isset($_SESSION["user"])){?>
+                    <?php if (isset($_SESSION["user"])) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="./words.php">Words</a>
                         </li>
@@ -43,15 +42,17 @@
 
                 <?php } ?>
                 </ul>
-                <?php if (isset($_SESSION["user"])){?>
+                <?php if (isset($_SESSION["user"])) { ?>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item pull-right">
-                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./sites/register.php"><?php echo $_SESSION["user"]  ?></a>
+                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./sites/register.php"><?php echo $_SESSION[
+                                "user"
+                            ]; ?></a>
                             <a href="../utils/logout.php"class="btn btn-outline-danger">Logout</a>
 
                         </li>
                     </ul>
-                <?php }else{?>
+                <?php } else { ?>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item pull-right">

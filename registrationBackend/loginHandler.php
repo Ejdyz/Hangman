@@ -1,40 +1,42 @@
   <?php
-    session_start();
-    $conn = mysqli_connect("localhost", "root", "", "wea");
+  session_start();
+  $conn = mysqli_connect("localhost", "root", "", "wea");
 
-    if (!$conn) {
+  if (!$conn) {
       die("Connection failed: " . mysqli_connect_error());
-    }
+  }
 
-    //save data from form
-    $registerEmail = $_POST["Email"];
-    $registerPassword = hash('sha256',$_POST["Password"]);
+  //save data from form
+  $registerEmail = $_POST["Email"];
+  $registerPassword = hash("sha256", $_POST["Password"]);
 
-    $sql = "SELECT * FROM users WHERE email LIKE '$registerEmail'";
-    $result = mysqli_query($conn, $sql);
-    
+  $sql = "SELECT * FROM users WHERE email LIKE '$registerEmail'";
+  $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+  if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
 
-        $dtbId = $row['id'];
-        $dtbEmail = $row['email'];
-        $dtbUsername = $row['username'];
-        $dtbPassword = $row['password'];
-      
+      $dtbId = $row["id"];
+      $dtbEmail = $row["email"];
+      $dtbUsername = $row["username"];
+      $dtbPassword = $row["password"];
 
-        if($dtbEmail == $registerEmail && $dtbPassword == $registerPassword){
+      if ($dtbEmail == $registerEmail && $dtbPassword == $registerPassword) {
           //succesful login
           $_SESSION["user"] = $dtbUsername;
           $_SESSION["user_id"] = $dtbId;
           header("Location:../index.php");
-        }else if($dtbEmail != $registerEmail || $dtbPassword != $registerPassword){
+      } elseif (
+          $dtbEmail != $registerEmail ||
+          $dtbPassword != $registerPassword
+      ) {
           //invalid login
           $_SESSION["invalidLogin"] = true;
           header("Location:../sites/login.php");
-        }
-    } else {
+      }
+  } else {
       //user is not in database
       header("Location:../sites/errorSite/userDontExist.php");
-    }
-  ?>
+  }
+
+?>

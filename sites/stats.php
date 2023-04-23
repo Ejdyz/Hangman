@@ -8,23 +8,24 @@ if (!$conn) {
 
 session_start();
 
-if (!isset($_SESSION['user_id'])) { //todo add login
+if (!isset($_SESSION["user_id"])) {
+    //todo add login
     header("HTTP/1.1 401 Unauthorized");
     echo "You need to be logged in";
-    exit;
+    exit();
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION["user_id"];
 
 $query = "SELECT COUNT(*) AS total, SUM(win) AS wins FROM stats WHERE user_id = $user_id"; //todo change
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 
-$total_games = $row['total'];
-$total_wins = $row['wins'];
+$total_games = $row["total"];
+$total_wins = $row["wins"];
 $total_losses = $total_games - $total_wins;
-$win_percent = ($total_games > 0) ? round(($total_wins / $total_games) * 100, 2) : 0;
-
+$win_percent =
+    $total_games > 0 ? round(($total_wins / $total_games) * 100, 2) : 0;
 
 $query = "SELECT w.word, s.win, s.id FROM stats s JOIN words w ON s.word_id = w.id WHERE s.user_id = $user_id ORDER BY s.id DESC"; //todo change
 $result = mysqli_query($conn, $query);
@@ -80,7 +81,9 @@ mysqli_close($conn);
                 <?php if (isset($_SESSION["user"])) { ?>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item pull-right">
-                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./sites/register.php"><?php echo $_SESSION["user"]  ?></a>
+                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./sites/register.php"><?php echo $_SESSION[
+                                "user"
+                            ]; ?></a>
                         </li>
                     </ul>
                 <?php } else { ?>
@@ -106,8 +109,12 @@ mysqli_close($conn);
                         <?php
                         echo "<h5>Win rate: " . $win_percent . "% </h5>";
                         echo "<h5>number of games: " . $total_games . "</h5>";
-                        echo "<h5>number of lost games: " . $total_losses . "</h5>";
-                        echo "<h5>number of win games: " . $total_wins . "</h5>"
+                        echo "<h5>number of lost games: " .
+                            $total_losses .
+                            "</h5>";
+                        echo "<h5>number of win games: " .
+                            $total_wins .
+                            "</h5>";
                         ?>
                     </div>
                 </form>
@@ -126,21 +133,25 @@ mysqli_close($conn);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                if (mysqli_num_rows($result) > 0) {
+                                <?php if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        $word = $row['word'];
-                                        $win = ($row['win'] == 1) ? 'Win' : 'Lose';
+                                        $word = $row["word"];
+                                        $win =
+                                            $row["win"] == 1 ? "Win" : "Lose";
                                         $id = $row["id"];
-                                        echo "<tr><td>" . $id . "</td><td>" . $word . "</td><td>" . $win . "</td></tr>";
+                                        echo "<tr><td>" .
+                                            $id .
+                                            "</td><td>" .
+                                            $word .
+                                            "</td><td>" .
+                                            $win .
+                                            "</td></tr>";
                                     }
-                                
+
                                     echo "</table>";
-                                }
-                                else {
+                                } else {
                                     echo "<tr><td colspan='3'>No games to display</td></tr>";
-                                }
-                                ?>
+                                } ?>
                             </tbody>
                         </table>
                     </div>

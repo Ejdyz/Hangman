@@ -8,10 +8,10 @@ if (!$conn) {
 
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION["user_id"])) {
     header("HTTP/1.1 401 Unauthorized");
     echo "You need to be logged in";
-    exit;
+    exit();
 }
 
 if (isset($_POST["win"])) {
@@ -32,7 +32,10 @@ if (isset($_SESSION["word_id"])) {
 $word_id = $_SESSION["word_id"];
 $user_id = $_SESSION["user_id"];
 
-$stmt = mysqli_prepare($conn,"INSERT INTO stats (id, win, user_id, word_id) VALUES (NULL, ?, ?, ?)",);
+$stmt = mysqli_prepare(
+    $conn,
+    "INSERT INTO stats (id, win, user_id, word_id) VALUES (NULL, ?, ?, ?)",
+);
 mysqli_stmt_bind_param($stmt, "iii", $win, $user_id, $word_id);
 
 if (mysqli_stmt_execute($stmt)) {

@@ -7,18 +7,18 @@ if (!$conn) {
 }
 
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION["user_id"])) {
     header("HTTP/1.1 401 Unauthorized");
     echo "You need to be logged in";
-    exit;
+    exit();
 }
 
-if (isset($_POST['word'])) {
-    $word = $_POST['word'];
+if (isset($_POST["word"])) {
+    $word = $_POST["word"];
 } else {
     header("HTTP/1.1 400 Bad Request");
     echo "Bad request";
-    exit;
+    exit();
 }
 
 $stmt_check = mysqli_prepare($conn, "SELECT * FROM words WHERE word=?");
@@ -28,7 +28,7 @@ $result = mysqli_stmt_get_result($stmt_check);
 if (mysqli_num_rows($result) > 0) {
     header("HTTP/1.1 409 Conflict");
     echo "The word already exists";
-    exit;
+    exit();
 }
 
 $stmt_insert = mysqli_prepare($conn, "INSERT INTO words (word) VALUES (?)");

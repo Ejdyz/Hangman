@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION["user_id"])) {
     header("HTTP/1.1 401 Unauthorized");
     echo "You need to be logged in";
-    exit;
+    exit();
 }
 
 $conn = mysqli_connect("localhost", "root", "", "wea");
@@ -16,7 +16,7 @@ if (!$conn) {
 $sql_count = "SELECT COUNT(*) as count FROM words";
 $result_count = mysqli_query($conn, $sql_count);
 $row_count = mysqli_fetch_assoc($result_count);
-$count = $row_count['count'];
+$count = $row_count["count"];
 
 $midpoint = ceil($count / 2);
 
@@ -63,7 +63,7 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
                         <a class="nav-link" href="game.php">Game</a>
                     </li>
 
-                    <?php if (isset($_SESSION["user"])){?>
+                    <?php if (isset($_SESSION["user"])) { ?>
                         <li class="nav-item">
                             <a class="nav-link active" href="./words.php">Words</a>
                         </li>
@@ -73,13 +73,15 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
 
                 <?php } ?>
                 </ul>
-                <?php if (isset($_SESSION["user"])){?>
+                <?php if (isset($_SESSION["user"])) { ?>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item pull-right">
-                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./register.php"><?php echo $_SESSION["user"]  ?></a>
+                            <a class="btn btn-outline-success me-2 disabled" type="button" href="./register.php"><?php echo $_SESSION[
+                                "user"
+                            ]; ?></a>
                         </li>
                     </ul>
-                <?php }else{?>
+                <?php } else { ?>
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item pull-right">
@@ -119,18 +121,18 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
 							</tr>
 						</thead>
 						<tbody>
-                        <?php
-						if (mysqli_num_rows($result_first_half) > 0) {
-							while($row = mysqli_fetch_assoc($result_first_half)) {
-								echo "<tr>";
-								echo "<td>" . $row["word"] . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm delete-word' onclick='removeWord(this.parentNode.parentNode.firstChild.innerHTML)'>Delete</button></td>";
-								echo "</tr>";
-							}
-						} else {
-							echo "<tr><td colspan='2'>No words found.</td></tr>";
-						}
-					?>
+                        <?php if (mysqli_num_rows($result_first_half) > 0) {
+                            while (
+                                $row = mysqli_fetch_assoc($result_first_half)
+                            ) {
+                                echo "<tr>";
+                                echo "<td>" . $row["word"] . "</td>";
+                                echo "<td><button class='btn btn-danger btn-sm delete-word' onclick='removeWord(this.parentNode.parentNode.firstChild.innerHTML)'>Delete</button></td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='2'>No words found.</td></tr>";
+                        } ?>
 						</tbody>
 					</table>
 				</div>
@@ -145,23 +147,24 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
 						<tbody>
                         <?php
                         $current_row = $midpoint;
-						if (mysqli_num_rows($result_second_half) > 0) {
-							while($row = mysqli_fetch_assoc($result_second_half)) {
+                        if (mysqli_num_rows($result_second_half) > 0) {
+                            while (
+                                $row = mysqli_fetch_assoc($result_second_half)
+                            ) {
                                 $current_row++;
-								echo "<tr>";
-								echo "<td>" . $row["word"] . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm delete-word' onclick='removeWord(this.parentNode.parentNode.firstChild.innerHTML)'>Delete</button></td>";
-								echo "</tr>";
-							}
+                                echo "<tr>";
+                                echo "<td>" . $row["word"] . "</td>";
+                                echo "<td><button class='btn btn-danger btn-sm delete-word' onclick='removeWord(this.parentNode.parentNode.firstChild.innerHTML)'>Delete</button></td>";
+                                echo "</tr>";
+                            }
 
                             if ($count % 2 != 0 && $current_row == $count) {
                                 echo "<tr><td colspan='2' style = 'height: 47px'></td></tr> ";
-                              }
-
-						} else {
-							echo "<tr><td colspan='2'>No words found.</td></tr>";
-						}
-					?>
+                            }
+                        } else {
+                            echo "<tr><td colspan='2'>No words found.</td></tr>";
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
