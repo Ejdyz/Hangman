@@ -26,10 +26,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.php"> Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php"> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Game</a>
+                        <a class="nav-link active" href="#">Game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./words.php">Words</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

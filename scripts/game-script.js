@@ -39,7 +39,7 @@ let currentWord;
 
 function getWorld(){
   axios.get("../api/words/get.php").then(response => {
-    currentWord = response.data.word;
+    currentWord = response.data;
   })
 }
 let hiddenCurrentWord = "";
@@ -191,7 +191,7 @@ function sendData(win) {
   win ? userWin = 1 : userWin =0;
   axios.post("../api/results/send.php", {
     win: userWin
-  })
+  },{headers: { "Content-Type": "multipart/form-data" }})
 }
 //checker of win
 function didUserWin() {

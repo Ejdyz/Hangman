@@ -38,6 +38,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./sites/game.php">Game</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./sites/words.php">Words</a>
+                    </li>
                 </ul>
                 
                 <?php if (isset($_SESSION["user"])){?>
