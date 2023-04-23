@@ -9,8 +9,8 @@ let numOfButtons = 26;
 async function getWordStats() {
   const response = await axios.get("../api/words/stats.php")
 
-  document.getElementById("win").innerHTML = "correct guesses: " + response.data.win
-  document.getElementById("lose").innerHTML = "false guesses: " + response.data.lose
+  document.getElementById("win").innerHTML = "Correct guesses: " + response.data.win
+  document.getElementById("lose").innerHTML = "False guesses: " + response.data.lose
 }
 function generateButton(){
   for (let i = 0; i < 26; i++) {
