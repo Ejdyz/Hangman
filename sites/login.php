@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,9 +22,22 @@
                 <label>Email</label>
             </div>
             <div class="user-box">
-                <input type="password" name="Passsword" required>
+                <input type="password" name="Password" required>
                 <label>Password</label>
             </div>
+            <?php if(isset($_SESSION["invalidLogin"])){
+                    if($_SESSION["invalidLogin"]==true){ ?>
+                        <h3 style="color:#f90000">Invalid login</h3>
+
+             <?php       }else{?>
+                <h3></h3>
+            <?php 
+             }
+            }else{ ?>
+                <h3></h3>
+            <?php
+            }
+            ?>
             <button>
                 <span></span>
                 <span></span>
