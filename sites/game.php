@@ -47,7 +47,7 @@
         <h3 id="hiddenWord"></h3>
 
 
-        <h5 style="color:white; margin-top:10px;" id="usedLetters">Použitá písmena: </h5>
+
       </div>
   </div>
 
