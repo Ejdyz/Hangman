@@ -6,7 +6,12 @@ const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 let tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 let numOfButtons = 26;
 // Output the letters in the console
+async function getWordStats() {
+  const response = await axios.get("../api/words/stats.php")
 
+  document.getElementById("win").innerHTML = "correct guesses: " + response.data.win
+  document.getElementById("lose").innerHTML = "false guesses: " + response.data.lose
+}
 function generateButton(){
   for (let i = 0; i < 26; i++) {
     const button = document.createElement("button");
@@ -77,6 +82,7 @@ function startGame() {
   clearScreen();
   getWorld().then(() => {
     hiddenCurrentWord = getHiddenWord(currentWord);
+    getWordStats()
     updateUI()
 
     errorCount = 0;
