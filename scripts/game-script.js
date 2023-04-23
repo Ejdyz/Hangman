@@ -34,41 +34,14 @@ function deleteAllButons(){
 }
 
 
-
-//getovat slova pres api
-const words = [
-  "kubin",
-  "párátko",
-  "kolotoč",
-  "kosik",
-  "tabule",
-  "dědictví",
-  "ragby",
-  "ptakopysk",
-  "mrak",
-  "klan",
-  "signál",
-  "kleště",
-  "česko",
-  "hřebec",
-  "topol",
-  "báseň",
-  "řasa",
-  "záškolák",
-  "zápalky",
-  "vítěz",
-  "lentilka",
-  "mráček",
-  "duch",
-  "sekunda",
-  "část",
-];
-
 let currentWord;
 //getting random word and defiing hidden word
 
-getWorld()
-
+function getWorld(){
+  axios.get("../api/words/get.php").then(response => {
+    currentWord = response.data.word;
+  })
+}
 let hiddenCurrentWord = "";
 
 //defiing errors
@@ -84,11 +57,14 @@ const btn = document.getElementById("button");
 //starting game
 startGame();
 
+
 function startGame() {
+  getWorld()
+  setTimeout(() => {  
+    hiddenCurrentWord = getHiddenWord(currentWord);
+    updateUI()
 
-
-  currentWord = rndWord(words);
-  hiddenCurrentWord = getHiddenWord(currentWord);
+  }, 20)
 
   errorCount = 0;
 
@@ -173,10 +149,10 @@ function win() {
   element.appendChild(slovo);
 
   const button = document.createElement("button");
-  button.className += "btn btn-sm btn-outline-secondary ";
+  button.className += "playAgain btn btn-secondary rounded-pill px-3";
+  button.type = "button";
   button.innerHTML = "Play Again";
   button.addEventListener("click", startGame);
-
   element.appendChild(button);
   sendData(true);
 
@@ -202,7 +178,6 @@ function lose() {
   button.type = "button";
   button.innerHTML = "Play Again";
   button.addEventListener("click", startGame);
-  console.log(buttons.length);
   element.appendChild(button);
 
   //odesilani zaznamu do databaze
@@ -210,14 +185,13 @@ function lose() {
   sendData(false);
 }
 
-function getWorld(){
-  axios.get("../api/words/get.php").then(response => {
-    currentWord = response.data.word;
-    console.log(currentWord);
-  })
-}
+
 
 function sendData(win) {
+
+  // axios.post("../api/results/send.php", {
+  // TODO based on api
+  // })
   console.log("name")
   console.log("win:" + win)
   console.log(currentWord)
@@ -237,10 +211,6 @@ function getHiddenWord(word) {
     hiddenWord += "-";
   }
   return hiddenWord;
-}
-//get random world
-function rndWord(words) {
-  return words[rnd(0, words.length)];
 }
 //defining random
 function rnd(min, max) {
