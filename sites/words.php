@@ -1,5 +1,12 @@
 <?php
+
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("HTTP/1.1 401 Unauthorized");
+    echo "You need to be logged in";
+    exit;
+}
+
 $conn = mysqli_connect("localhost", "root", "", "wea");
 
 if (!$conn) {
