@@ -56,4 +56,4 @@ nových slov do databáze.
 
 - stranka s user statistikama  -Vláďa
 
-- admin stranka pro pridavani slov  -Vláďa
+- ~~admin stranka pro pridavani slov  -Vláďa~~

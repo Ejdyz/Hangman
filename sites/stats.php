@@ -1,7 +1,24 @@
-<?php 
-    session_start();
-?>
-<!DOCTYPE html>
+<?php
+  session_start();
+$conn = mysqli_connect("localhost", "root", "", "wea");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql_count = "SELECT COUNT(*) as count FROM words";
+$result_count = mysqli_query($conn, $sql_count);
+$row_count = mysqli_fetch_assoc($result_count);
+$count = $row_count['count'];
+
+$midpoint = ceil($count / 2);
+
+$sql_first_half = "SELECT * FROM words LIMIT $midpoint";
+$result_first_half = mysqli_query($conn, $sql_first_half);
+
+$sql_second_half = "SELECT * FROM words LIMIT $midpoint, $count";
+$result_second_half = mysqli_query($conn, $sql_second_half);
+?><!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <!-- data-bs-theme="light" for light mode -->
 
@@ -9,17 +26,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="styles/home-page-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-
-    <title>Home</title>
+    <title>Statistics</title>
 </head>
 
 <body>
-
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -34,18 +49,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./sites/game.php">Game</a>
+                        <a class="nav-link" href="game.php">Game</a>
                     </li>
 
                     <?php if (isset($_SESSION["user"])){?>
                         <li class="nav-item">
-                            <a class="nav-link" href="./sites/words.php">Words</a>
+                            <a class="nav-link" href="./words.php">Words</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./sites/stats.php">Statistics</a>
+                            <a class="nav-link active" href="./stats.php">Statistics</a>
                         </li>
 
                 <?php } ?>
@@ -69,32 +84,46 @@
         </div>
     </nav>
 
-    <!-- BODY of page  -->
-    <div class="body">
-        <h1>Welcome to Hangman</h1>
-        <hr>
 
-        <br>
-        <h4>Welcome to our hangman game, created as part of our school project and graduation question! Our names are Jan and Vladimir, and we've worked hard to bring you this fun and challenging game.</h4>
-        <br>
-        <h4>Our hangman game is written in PHP and JavaScript, making it a dynamic and interactive experience. To play, simply click on the buttons with every letter of the alphabet to try and guess the hidden word. But be careful - with each incorrect guess, a part of the hangman's body will be added to the gallows. Can you guess the word before the hangman is fully formed?</h4>
-        <br>
-        <h4>We hope you enjoy playing our hangman game as much as we enjoyed creating it. Good luck, and have fun!</h4>
-        <br>
-        <br>
-        <?php if (isset($_SESSION["user"]) == false){?>
-        <div class="alert alert-danger" role="alert" style="text-align: center; ">
-            You can play without <a href="./sites/register.php">sigining in</a>, but your stats wont be counted!
-        </div>
-        <?php }?>
-        
+    <div class="container" style="margin-top: 30px;">
+		<!-- <h1>Edit Words</h1> -->
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-md-12">
+				<form id="add-word-form">
+					<div class="form-group">
+						<h5>Win rate: 50%</h5>
+            <h5>number of games: 80</h5>
+            <h5>number of lost games: 40</h5>
+            <h5>number of win games: 40</h5>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row" style="padding-top: 20px; border-top: 1px solid gray;">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-bordered text-center">
+						<thead>
+							<tr>
+								<th style="width: 15%;">game id</th>
+                <th style="width: 70%;">Word</th>
+                <th style="width: 15%;">Win/lose</th>
+							</tr>
+						</thead>
+						<tbody>
+              <tr>
+                <td>1</td>
+                <td>Slovicko</td>
+                <td>False</td>
+              </tr>
+						</tbody>
+					</table>
+				</div>
+				
     </div>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous">
-    </script>
+		</div>
+	</div>
 </body>
 
 </html>
