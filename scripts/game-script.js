@@ -1,12 +1,39 @@
-const buttons = [
+let buttons = [
 
 ]
 // Store the letters as an array in a constant
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
+let tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let numOfButtons = 26;
 // Output the letters in the console
 
 
+
+function generateButton(){
+  for (let i = 0; i < 26; i++) {
+    const button = document.createElement("button");
+    button.innerHTML = alphabet[i].toUpperCase();
+    button.id = alphabet[i]
+    button.classList += "btn btn-outline-success me-2"
+    button.addEventListener("click", () => guess(alphabet[i]));
+    document.getElementById("buttons").appendChild(button);
+    buttons.push(button);
+  }
+}
+function deleteButton(letter){
+
+  buttons[tempAlpha.indexOf(letter)].remove();
+  buttons.splice(tempAlpha.indexOf(letter),1)
+  tempAlpha.splice(tempAlpha.indexOf(letter),1)
+  numOfButtons--;
+}
+function deleteAllButons(){
+  buttons.forEach(btn => {
+    btn.remove();
+  });
+  buttons = [];
+  tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+}
 const words = [
   "kubin",
   "párátko",
@@ -54,6 +81,8 @@ const btn = document.getElementById("button");
 startGame();
 
 function startGame() {
+  deleteAllButons()
+  
   currentWord = rndWord(words);
   hiddenCurrentWord = getHiddenWord(currentWord);
 
@@ -61,7 +90,7 @@ function startGame() {
 
   clearScreen();
   updateUI();
-  generateButtons()
+  generateButton()
 }
 
 //update of components on the screen
@@ -83,14 +112,7 @@ function guess(letter) {
     }
   }
   
-  console.log(letter);
-  
-  //removing button of that letter
-  buttons[alphabet.indexOf(letter)].remove();
-  buttons.splice(alphabet.indexOf(letter),1)
-  alphabet.splice(alphabet.indexOf(letter),1)
-
-
+  deleteButton(letter)
 
 
   letter = letter.toLowerCase();
@@ -151,6 +173,7 @@ function win() {
   button.addEventListener("click", startGame);
 
   element.appendChild(button);
+
 }
 //loose over all screen
 function lose() {
@@ -174,24 +197,10 @@ function lose() {
   button.addEventListener("click", startGame);
   console.log(buttons.length);
   element.appendChild(button);
+
+  //repair
 }
-function generateButtons(){
-  if (buttons.length < 26 && buttons.length > 0) {
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].remove();
-      buttons.splice(i,1) 
-    }
-  }
-  for (let i = 0; i < 26; i++) {
-    const button = document.createElement("button");
-    button.innerHTML = alphabet[i].toUpperCase();
-    button.id = alphabet[i]
-    button.classList += "btn btn-outline-success me-2"
-    button.addEventListener("click", () => guess(alphabet[i]));
-    document.getElementById("buttons").appendChild(button);
-    buttons.push(button);
-  }
-}
+
 //checker of win
 function didUserWin() {
   return currentWord === hiddenCurrentWord;
