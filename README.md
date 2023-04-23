@@ -48,12 +48,12 @@ nových slov do databáze.
 
 - Register a login backend  -Ejdy
 
-- ~~Databaze  -Vláďa --user --slova --tabulka zaznamu  | user | win/loose | word |~~
+- Databaze  -Vláďa --user --slova --tabulka zaznamu  | user | win/loose | word |
 
 - fix sibenice  -Ejdy
 
-- ~~api pro sibenici  -Vláďa --dotazani na slovo --odesilani zaznamu~~
+- api pro sibenici  -Vláďa --dotazani na slovo --odesilani zaznamu
 
 - stranka s user statistikama  -Vláďa - frondend Ejdy
 
-- ~~admin stranka pro pridavani slov  -Vláďa~~
+- admin stranka pro pridavani slov  -Vláďa
