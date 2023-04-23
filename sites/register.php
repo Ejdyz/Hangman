@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href=".././styles/form-style.css">
+    <script src="../scripts/register-script.js"></script>
     <title>Register</title>
 </head>
 
@@ -22,11 +23,11 @@
                 <label>Email</label>
             </div>
             <div class="user-box">
-                <input type="password" name="Password" required>
+                <input type="password" id="password" name="Password" required>
                 <label>Password</label>
             </div>
             <div class="user-box">
-                <input type="password" name="CheckPassword" required>
+                <input type="password" id="checkPassword" name="CheckPassword" required>
                 <label>Password Again</label>
             </div>
             <button>
