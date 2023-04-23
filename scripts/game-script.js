@@ -7,8 +7,6 @@ let tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"
 let numOfButtons = 26;
 // Output the letters in the console
 
-
-
 function generateButton(){
   for (let i = 0; i < 26; i++) {
     const button = document.createElement("button");
@@ -34,6 +32,10 @@ function deleteAllButons(){
   buttons = [];
   tempAlpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 }
+
+
+
+//getovat slova pres api
 const words = [
   "kubin",
   "párátko",
@@ -62,9 +64,11 @@ const words = [
   "část",
 ];
 
-
+let currentWord;
 //getting random word and defiing hidden word
-let currentWord = rnd(0, words.length);
+
+getWorld()
+
 let hiddenCurrentWord = "";
 
 //defiing errors
@@ -81,8 +85,8 @@ const btn = document.getElementById("button");
 startGame();
 
 function startGame() {
-  deleteAllButons()
-  
+
+
   currentWord = rndWord(words);
   hiddenCurrentWord = getHiddenWord(currentWord);
 
@@ -154,6 +158,7 @@ function clearScreen() {
 }
 //win over all screen
 function win() {
+  deleteAllButons()
   const element = document.getElementById("overGame");
   element.className += "win";
 
@@ -173,10 +178,12 @@ function win() {
   button.addEventListener("click", startGame);
 
   element.appendChild(button);
+  sendData(true);
 
 }
 //loose over all screen
 function lose() {
+  deleteAllButons()
   const element = document.getElementById("overGame");
   element.className += "lose";
 
@@ -198,9 +205,23 @@ function lose() {
   console.log(buttons.length);
   element.appendChild(button);
 
-  //repair
+  //odesilani zaznamu do databaze
+  //dotazat se na to jestli je lognuty
+  sendData(false);
 }
 
+function getWorld(){
+  axios.get("../api/words/get.php").then(response => {
+    currentWord = response.data.word;
+    console.log(currentWord);
+  })
+}
+
+function sendData(win) {
+  console.log("name")
+  console.log("win:" + win)
+  console.log(currentWord)
+}
 //checker of win
 function didUserWin() {
   return currentWord === hiddenCurrentWord;
