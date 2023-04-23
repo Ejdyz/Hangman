@@ -39,12 +39,22 @@
                         <a class="nav-link" href="./sites/game.php">Game</a>
                     </li>
                 </ul>
+                
+                <?php if (isset($_SESSION["user"])){?>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item pull-right">
+                            <a class="btn btn-outline-success me-2" type="button" href="./sites/register.php"><?php echo $_SESSION["user"]  ?></a>
+                        </li>
+                    </ul>
+                <?php }else{?>
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item pull-right">
                         <a class="btn btn-outline-success me-2" type="button" href="./sites/register.php">Register</a>
                         <a class="btn btn-sm btn-outline-secondary" type="button" href="./sites/login.php">Login</a>
                     </li>
                 </ul>
+                <?php } ?>
             </div>
         </div>
     </nav>
