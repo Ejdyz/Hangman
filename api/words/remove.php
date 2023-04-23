@@ -2,16 +2,18 @@
 session_start();
 
 
-if (!isset($_SESSION["user_id"])) {
-    // header("HTTP/1.1 401 Unauthorized"); //todo add login
-    // exit;
-}
+// if (!isset($_SESSION['user_id'])) { //todo add login
+//     header("HTTP/1.1 401 Unauthorized");
+//     echo "You need to be logged in";
+//     exit;
+// }
 
-
-if (!isset($_POST["word"])) {
-    http_response_code(400);
-    echo json_encode(["message" => "The word for removal was not provided."]);
-    exit();
+if (isset($_POST['word'])) {
+    $word = $_POST['word'];
+} else {
+    header("HTTP/1.1 400 Bad Request");
+    echo "Bad request";
+    exit;
 }
 
 $conn = mysqli_connect("localhost", "root", "", "wea");
@@ -20,18 +22,22 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
 $word = $_POST["word"];
 
-$sql = "DELETE FROM words WHERE word = '{$word}'";
+$sql = "DELETE FROM words WHERE word = ?";
 
-$result = mysqli_query($conn, $sql);
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "s", $word);
+mysqli_stmt_execute($stmt);
 
-if ($result) {
-    echo json_encode(array("message" => "The word was removed"));
+if (mysqli_stmt_affected_rows($stmt) > 0) {
+    echo "The word was removed";
 } else {
     header("HTTP/1.0 500 Internal Server Error");
-    echo json_encode(array("message" => "Error"));
+    echo "Error";
     exit;
 }
+
+mysqli_stmt_close($stmt);
 mysqli_close($conn);
+?>
