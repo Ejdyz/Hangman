@@ -71,12 +71,9 @@ session_start(); ?>
       <img src="" alt="" id="hangman" />
       <div id="buttons" class="input">
         <h3 id="hiddenWord"></h3>
-
-
-
       </div>
   </div>
-  <div id="stats">
+  <div style="margin-left:15px" id="stats">
     <p id="win">
     
     </p>
