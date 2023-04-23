@@ -35,6 +35,6 @@
         }
     } else {
       //user is not in database
-      header("Location:../sites/register.php");
+      header("Location:../sites/errorSite/userDontExist.php");
     }
   ?>
