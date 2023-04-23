@@ -75,8 +75,8 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item pull-right">
-                        <a class="btn btn-outline-success me-2" type="button" href="./sites/register.php">Register</a>
-                        <a class="btn btn-sm btn-outline-secondary" type="button" href="./sites/login.php">Login</a>
+                        <a class="btn btn-outline-success me-2" type="button" href="./register.php">Register</a>
+                        <a class="btn btn-sm btn-outline-secondary" type="button" href="./login.php">Login</a>
                     </li>
                 </ul>
                 <?php } ?>
