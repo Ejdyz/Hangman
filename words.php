@@ -52,10 +52,11 @@
 			<div class="col-md-6">
 				<form id="add-word-form">
 					<div class="form-group">
-						<label for="word" style="margin-bottom: 10px;">New Word</label>
-						<input type="text" class="form-control" id="word" name="word">
+						<label for="word" style="margin-bottom: 10px;">New Word</label><br>
+						<input type="text" class="form-control"  style="display:inline;width:80%;" id="word" name="word">
+                        <button type="button" class="btn btn-primary"onclick="addWord()" style="display:inline">Add Word</button>
+
 					</div>
-                    <button type="button" class="btn btn-primary" onclick="addWord()" style="display:inline">Add Word</button>
 				</form>
 			</div>
 		</div>
