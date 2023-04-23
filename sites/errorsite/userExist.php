@@ -46,6 +46,8 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item pull-right">
                             <a class="btn btn-outline-success me-2 disabled" type="button" href="../stats.php"><?php echo $_SESSION["user"]  ?></a>
+                            <a href="../../utils/logout.php"class="btn btn-outline-danger">Logout</a>
+
                         </li>
                     </ul>
                 <?php }else{?>
