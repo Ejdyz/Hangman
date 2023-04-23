@@ -75,6 +75,14 @@
 
       </div>
   </div>
+  <div id="stats">
+    <p id="win">
+    
+    </p>
+
+    <p id="lose">
+    </p>
+  </div>
 
 
 
