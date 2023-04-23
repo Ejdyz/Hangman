@@ -151,7 +151,7 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
         function addWord(){
             axios({
                 method: "post",
-                url: "api/words/add.php",
+                url: "../api/words/add.php",
                 headers: { "Content-Type": "multipart/form-data" },
                 data: {
                     word: word.value
@@ -165,7 +165,7 @@ $result_second_half = mysqli_query($conn, $sql_second_half);
         function removeWord(remWord) {
             axios({
                 method: "post",
-                url: "api/words/remove.php",
+                url: "../api/words/remove.php",
                 headers: { "Content-Type": "multipart/form-data" },
                 data: {
                     word: remWord
