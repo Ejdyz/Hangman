@@ -12,13 +12,13 @@
 <body>
     <div class="login-box" action="POST">
         <h2>Login</h2>
-        <form>
+        <form action="../registrationBackend/loginHandler.php" method="post">
             <div class="user-box">
-                <input type="email" name="" required>
+                <input type="email" name="Email" required>
                 <label>Email</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required>
+                <input type="password" name="Passsword" required>
                 <label>Password</label>
             </div>
             <button>

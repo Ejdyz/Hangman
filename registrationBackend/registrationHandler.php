@@ -11,9 +11,7 @@
   $registerUsername = $_POST["Username"];
   $registerEmail = $_POST["Email"];
   $registerPassword = hash('sha256', $_POST["Password"]);
-  
-  $_SESSION["user"] = $registerUsername;
-  
+
   //zjistovani a overovani zda je uzivatel v dat.
   $stmt = $conn->prepare("SELECT * FROM users WHERE username LIKE '$registerEmail'");
   $stmt->execute();
@@ -27,7 +25,7 @@
   }else{
     $stmt = $conn->prepare("INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES (NULL, '$registerUsername', '$registerEmail', '$registerPassword');");
     $stmt->execute();
-    header("Location:../index.php");
+    header("Location:../sites/login.php");
   }
 
 ?>
