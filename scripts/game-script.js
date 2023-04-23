@@ -37,8 +37,8 @@ function deleteAllButons(){
 let currentWord;
 //getting random word and defiing hidden word
 
-function getWorld(){
-  axios.get("../api/words/get.php").then(response => {
+async function getWorld(){
+  await axios.get("../api/words/get.php").then(response => {
     currentWord = response.data;
   })
 }
@@ -58,19 +58,32 @@ const btn = document.getElementById("button");
 startGame();
 
 
+// function startGame() {
+//   getWorld()
+//   setTimeout(() => {  
+//     hiddenCurrentWord = getHiddenWord(currentWord);
+//     updateUI()
+
+//   }, 20)
+
+//   errorCount = 0;
+
+//   clearScreen();
+//   updateUI();
+//   generateButton()
+// }
+
 function startGame() {
-  getWorld()
-  setTimeout(() => {  
+  clearScreen();
+  getWorld().then(() => {
     hiddenCurrentWord = getHiddenWord(currentWord);
     updateUI()
 
-  }, 20)
+    errorCount = 0;
 
-  errorCount = 0;
-
-  clearScreen();
-  updateUI();
-  generateButton()
+    updateUI();
+    generateButton()
+  })
 }
 
 //update of components on the screen
