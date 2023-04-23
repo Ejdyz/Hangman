@@ -182,19 +182,16 @@ function lose() {
 
   //odesilani zaznamu do databaze
   //dotazat se na to jestli je lognuty
+  
   sendData(false);
 }
 
-
-
 function sendData(win) {
-
-  // axios.post("../api/results/send.php", {
-  // TODO based on api
-  // })
-  console.log("name")
-  console.log("win:" + win)
-  console.log(currentWord)
+  userWin = 0;
+  win ? userWin = 1 : userWin =0;
+  axios.post("../api/results/send.php", {
+    win: userWin
+  })
 }
 //checker of win
 function didUserWin() {
